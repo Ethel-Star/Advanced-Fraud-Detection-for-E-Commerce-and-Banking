@@ -1,0 +1,63 @@
+2025-03-08 08:42:46,383 - INFO - Converted datetime column: signup_time
+2025-03-08 08:42:46,539 - INFO - Converted datetime column: purchase_time
+2025-03-08 08:42:46,710 - WARNING - Dropped non-convertible column: device_id
+2025-03-08 08:42:46,979 - WARNING - Dropped non-convertible column: country
+2025-03-08 08:42:47,983 - INFO - Starting model training and evaluation process
+2025-03-08 08:42:51,173 - INFO - Credit - Logistic Regression: AUC=0.924, Accuracy=0.975
+2025-03-08 08:43:07,283 - INFO - Credit - Decision Tree: AUC=0.810, Accuracy=0.999
+2025-03-08 08:46:19,165 - INFO - Credit - Random Forest: AUC=0.847, Accuracy=0.999
+2025-03-08 08:57:11,750 - INFO - Credit - Gradient Boosting: AUC=0.826, Accuracy=0.999
+2025-03-08 08:57:32,176 - INFO - Credit - MLP: AUC=0.847, Accuracy=0.999
+2025-03-08 10:19:41,039 - INFO - Processing high cardinality columns: ['device_id']
+2025-03-08 10:19:42,038 - INFO - Processing low cardinality columns: ['country']
+2025-03-08 10:19:42,249 - WARNING - Dropping columns with all NaNs: ['ip_address']
+2025-03-08 10:19:43,726 - INFO - Starting model training and evaluation process
+2025-03-08 10:19:54,808 - INFO - Credit - Logistic Regression: AUC=0.911, Accuracy=0.948
+2025-03-08 10:21:04,754 - INFO - Credit - Decision Tree: AUC=0.894, Accuracy=0.988
+2025-03-08 10:40:05,954 - INFO - Credit - Random Forest: AUC=0.915, Accuracy=0.999
+2025-03-08 11:55:24,751 - INFO - Credit - Gradient Boosting: AUC=0.910, Accuracy=0.998
+2025-03-08 11:56:45,025 - INFO - Credit - MLP: AUC=0.884, Accuracy=0.999
+2025-03-08 11:56:53,147 - INFO - Fraud - Logistic Regression: AUC=0.605, Accuracy=0.427
+2025-03-08 11:56:58,999 - INFO - Fraud - Decision Tree: AUC=0.689, Accuracy=0.703
+2025-03-08 11:59:49,774 - INFO - Fraud - Random Forest: AUC=0.738, Accuracy=0.864
+2025-03-08 12:09:01,988 - INFO - Fraud - Gradient Boosting: AUC=0.770, Accuracy=0.955
+2025-03-08 12:12:09,673 - INFO - Fraud - MLP: AUC=0.732, Accuracy=0.823
+2025-03-08 12:31:13,569 - INFO - Processing high cardinality columns: ['device_id']
+2025-03-08 12:31:14,089 - INFO - Processing low cardinality columns: ['country']
+2025-03-08 12:31:14,199 - WARNING - Dropping columns with all NaNs: ['ip_address']
+2025-03-08 12:31:15,080 - INFO - Starting model training and evaluation process
+2025-03-08 12:31:21,489 - INFO - Credit - Logistic Regression: AUC=0.911, Accuracy=0.948
+2025-03-08 12:32:04,441 - INFO - Credit - Decision Tree: AUC=0.894, Accuracy=0.988
+2025-03-08 12:49:02,809 - INFO - Credit - Random Forest: AUC=0.915, Accuracy=0.999
+2025-03-08 14:03:40,304 - INFO - Credit - Gradient Boosting: AUC=0.910, Accuracy=0.998
+2025-03-08 14:05:15,663 - INFO - Credit - MLP: AUC=0.884, Accuracy=0.999
+2025-03-08 14:05:17,649 - INFO - Fraud - Logistic Regression: AUC=0.605, Accuracy=0.427
+2025-03-08 14:05:23,187 - INFO - Fraud - Decision Tree: AUC=0.690, Accuracy=0.703
+2025-03-08 14:08:28,834 - INFO - Fraud - Random Forest: AUC=0.740, Accuracy=0.869
+2025-03-08 14:21:39,760 - INFO - Fraud - Gradient Boosting: AUC=0.770, Accuracy=0.956
+2025-03-08 14:24:49,047 - INFO - Fraud - MLP: AUC=0.732, Accuracy=0.823
+2025-03-08 14:58:27,858 - INFO - Credit - CNN: AUC=0.924, Accuracy=0.997
+2025-03-09 10:05:00,561 - INFO - Credit - RNN: AUC=0.905, Accuracy=0.999
+2025-03-09 10:18:47,838 - INFO - Credit - LSTM: AUC=0.900, Accuracy=0.999
+2025-03-09 10:27:11,000 - INFO - Fraud - CNN: AUC=0.770, Accuracy=0.953
+2025-03-09 10:33:03,596 - INFO - Fraud - RNN: AUC=0.766, Accuracy=0.946
+2025-03-09 10:39:08,740 - INFO - Fraud - LSTM: AUC=0.768, Accuracy=0.922
+2025-03-09 10:59:55,263 - INFO - Processing high cardinality columns: ['device_id']
+2025-03-09 10:59:55,771 - INFO - Processing low cardinality columns: ['country']
+2025-03-09 10:59:55,936 - WARNING - Dropping columns with all NaNs: ['ip_address']
+2025-03-09 11:00:25,336 - INFO - Credit - Logistic Regression: AUC=0.911, Accuracy=0.948
+2025-03-09 11:01:07,461 - INFO - Credit - Decision Tree: AUC=0.894, Accuracy=0.988
+2025-03-09 11:18:20,018 - INFO - Credit - Random Forest: AUC=0.915, Accuracy=0.999
+2025-03-09 12:26:40,011 - INFO - Credit - Gradient Boosting: AUC=0.910, Accuracy=0.998
+2025-03-09 12:28:04,664 - INFO - Credit - MLP: AUC=0.884, Accuracy=0.999
+2025-03-09 12:46:36,295 - INFO - Credit - CNN: AUC=0.918, Accuracy=0.996
+2025-03-09 12:57:45,287 - INFO - Credit - RNN: AUC=0.900, Accuracy=0.999
+2025-03-09 13:10:28,658 - INFO - Credit - LSTM: AUC=0.895, Accuracy=0.999
+2025-03-09 13:10:39,724 - INFO - Fraud - Logistic Regression: AUC=0.605, Accuracy=0.427
+2025-03-09 13:10:47,245 - INFO - Fraud - Decision Tree: AUC=0.689, Accuracy=0.703
+2025-03-09 13:13:34,541 - INFO - Fraud - Random Forest: AUC=0.737, Accuracy=0.855
+2025-03-09 13:21:49,144 - INFO - Fraud - Gradient Boosting: AUC=0.770, Accuracy=0.956
+2025-03-09 13:24:57,409 - INFO - Fraud - MLP: AUC=0.732, Accuracy=0.823
+2025-03-09 13:33:11,492 - INFO - Fraud - CNN: AUC=0.767, Accuracy=0.953
+2025-03-09 13:39:37,067 - INFO - Fraud - RNN: AUC=0.772, Accuracy=0.937
+2025-03-09 13:46:06,987 - INFO - Fraud - LSTM: AUC=0.771, Accuracy=0.933
