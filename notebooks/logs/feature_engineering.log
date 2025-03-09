@@ -1,0 +1,8 @@
+2025-03-07 16:23:27,735 - INFO - Converting datetime columns
+2025-03-07 16:23:29,838 - INFO - Starting feature engineering pipeline
+2025-03-07 16:23:29,839 - INFO - Engineering transaction features
+2025-03-07 16:23:41,219 - ERROR - Pipeline failed: cannot reindex on an axis with duplicate labels
+2025-03-07 16:38:14,287 - INFO - Converting datetime columns
+2025-03-07 16:38:16,572 - INFO - Starting feature engineering pipeline
+2025-03-07 16:38:16,572 - INFO - Engineering transaction features
+2025-03-07 16:38:27,516 - ERROR - Pipeline failed: cannot reindex on an axis with duplicate labels

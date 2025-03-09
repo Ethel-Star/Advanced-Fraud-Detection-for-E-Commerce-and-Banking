@@ -1,0 +1,35 @@
+2025-03-07 19:45:47,503 - INFO - Starting data type cleaning...
+2025-03-07 19:45:50,412 - INFO - Checking missing values...
+2025-03-07 19:45:50,507 - INFO - Checking for duplicates...
+2025-03-07 19:45:55,527 - WARNING - Removed 1081 duplicates from credit data
+2025-03-07 19:45:55,547 - INFO - Performing consistency validation...
+2025-03-07 19:45:55,558 - INFO - Generating target distribution visualization...
+2025-03-07 19:46:07,867 - INFO - Fraud data saved to E:\DS+ML\AIM3\WEEK.12\Data/cleaned_fraud.csv
+2025-03-07 19:46:25,249 - INFO - Credit card data saved to E:\DS+ML\AIM3\WEEK.12\Data/cleaned_credit.csv
+2025-03-07 19:46:25,528 - INFO - IP data saved to E:\DS+ML\AIM3\WEEK.12\Data/cleaned_ip.csv
+2025-03-07 19:46:34,721 - INFO - Starting fraud data distribution analysis
+2025-03-07 19:46:44,970 - INFO - Completed fraud data distribution analysis
+2025-03-07 19:46:47,979 - INFO - Starting credit card data distribution analysis
+2025-03-07 19:46:53,188 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-03-07 19:46:53,492 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-03-07 19:46:54,457 - INFO - Completed credit card data distribution analysis
+2025-03-07 19:46:54,466 - INFO - Starting fraud data relationship analysis
+2025-03-07 19:47:15,274 - INFO - Completed fraud data relationship analysis
+2025-03-07 19:47:15,285 - INFO - Starting correlation analysis
+2025-03-07 19:47:22,881 - INFO - Completed correlation analysis
+2025-03-07 19:47:22,895 - INFO - Starting IP to country mapping
+2025-03-07 19:47:23,084 - INFO - Completed IP to country mapping
+2025-03-07 19:47:24,277 - INFO - Data saved successfully to E:\DS+ML\AIM3\WEEK.12\Data/processed_fraud_data.csv
+2025-03-07 19:47:25,236 - INFO - Initializing FraudFeatureEngineer with data shape: (151112, 14)
+2025-03-07 19:47:25,332 - WARNING - Input data contains missing values. Proceed with caution.
+2025-03-07 19:47:25,334 - INFO - Starting full feature engineering pipeline...
+2025-03-07 19:47:25,335 - INFO - Adding transaction frequency and velocity features...
+2025-03-07 19:47:26,077 - INFO - Successfully added transaction frequency and velocity features.
+2025-03-07 19:47:26,079 - INFO - Adding time-based features...
+2025-03-07 19:47:26,143 - INFO - Successfully added time-based features.
+2025-03-07 19:47:26,145 - INFO - Normalizing numerical features: ['purchase_value', 'age', 'transaction_frequency', 'transaction_velocity']
+2025-03-07 19:47:26,184 - INFO - Fitted StandardScaler and normalized features.
+2025-03-07 19:47:26,185 - INFO - Encoding categorical features: ['source', 'browser', 'sex']
+2025-03-07 19:47:26,447 - INFO - Fitted OneHotEncoder with categories: [array(['Ads', 'Direct', 'SEO'], dtype=object), array(['Chrome', 'FireFox', 'IE', 'Opera', 'Safari'], dtype=object), array(['F', 'M'], dtype=object)]
+2025-03-07 19:47:26,626 - INFO - Successfully encoded 3 categorical features.
+2025-03-07 19:47:26,629 - INFO - Feature engineering completed. Final data shape: (151112, 22)
