@@ -141,7 +141,7 @@ Using Flask and Dash:
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/your-repo/Advanced-Fraud-Detection.git
+   git clone https://github.com/Ethel-Star/Advanced-Fraud-Detection-for-E-Commerce-and-Banking.git
    cd Advanced-Fraud-Detection
    ```
 2. Install dependencies:
