@@ -13,8 +13,6 @@ import matplotlib.pyplot as plt
 import joblib
 from scipy.stats import randint, uniform
 import logging
-
-
 class FraudDetectionModel:
     def __init__(self, credit_file, fraud_file):
         """
