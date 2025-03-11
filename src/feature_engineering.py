@@ -1,173 +1,168 @@
-import pandas as pd
-import logging
 import os
-from sklearn.preprocessing import StandardScaler
 import logging
-from sklearn.preprocessing import StandardScaler, OneHotEncoder
+import pandas as pd
+import numpy as np
+from sklearn.preprocessing import MinMaxScaler, StandardScaler, LabelEncoder
+
+# Unified logging configuration
+def setup_logger(name, log_dir="logs", level=logging.INFO):
+    os.makedirs(log_dir, exist_ok=True)
+    logger = logging.getLogger(name)
+    if not logger.handlers:
+        formatter = logging.Formatter(
+            "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
+        )
+        # File handler
+        fh = logging.FileHandler(os.path.join(log_dir, f"{name}.log"))
+        fh.setFormatter(formatter)
+        # Stream handler
+        sh = logging.StreamHandler()
+        sh.setFormatter(formatter)
+        logger.addHandler(fh)
+        logger.addHandler(sh)
+        logger.setLevel(level)
+    return logger
 
 class FraudFeatureEngineer:
     def __init__(self, fraud_data: pd.DataFrame):
-        """
-        Initialize the feature engineer with fraud data.
-        :param fraud_data: DataFrame containing the fraud dataset.
-        """
-        self.logger = logging.getLogger(self.__class__.__name__)
-        if not self.logger.handlers:
-            handler = logging.StreamHandler()
-            formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
-            handler.setFormatter(formatter)
-            self.logger.addHandler(handler)
-        self.logger.setLevel(logging.INFO)
+        self.original_data = fraud_data.copy()
+        self.engineered_data = None
+        self.logger = setup_logger(self.__class__.__name__)
+
+    def engineer_features(self) -> pd.DataFrame:
+        """Full feature engineering pipeline"""
+        try:
+            self.logger.info("Starting feature engineering")
+            self.engineered_data = self.original_data.copy()
+            
+            self._process_datetime()
+            self._create_transaction_features()
+            self._scale_features()
+            self._encode_categoricals()
+            self._finalize_features()
+            
+            self.logger.info("Feature engineering completed successfully")
+            return self.engineered_data
+        except Exception as e:
+            self.logger.error(f"Feature engineering failed: {str(e)}", exc_info=True)
+            raise
+
+    def _process_datetime(self):
+        """Convert and extract datetime features"""
+        # Convert to datetime with error handling
+        self.engineered_data['purchase_time'] = pd.to_datetime(
+            self.engineered_data['purchase_time'], errors='coerce'
+        )
+        self.engineered_data['signup_time'] = pd.to_datetime(
+            self.engineered_data['signup_time'], errors='coerce'
+        )
+
+        # Extract time features
+        self.engineered_data['purchase_hour'] = self.engineered_data['purchase_time'].dt.hour
+        self.engineered_data['purchase_day'] = self.engineered_data['purchase_time'].dt.dayofweek
+        self.engineered_data['signup_hour'] = self.engineered_data['signup_time'].dt.hour
         
-        self.logger.info("Initializing FraudFeatureEngineer with data shape: %s", fraud_data.shape)
+        # Convert to timestamps
+        self.engineered_data['purchase_timestamp'] = (
+            self.engineered_data['purchase_time'].astype('int64') // 10**9
+        )
+        self.engineered_data['signup_timestamp'] = (
+            self.engineered_data['signup_time'].astype('int64') // 10**9
+        )
+
+    def _create_transaction_features(self):
+        """Create transaction behavior features"""
+        # Transaction frequency
+        self.engineered_data['transaction_frequency'] = (
+            self.engineered_data.groupby('user_id')['user_id']
+            .transform('count')
+        )
         
-        # Validate required columns
-        required_columns = ['user_id', 'purchase_time', 'purchase_value', 'age', 'source', 'browser', 'sex']
-        missing_columns = [col for col in required_columns if col not in fraud_data.columns]
-        if missing_columns:
-            self.logger.error("Missing required columns: %s", missing_columns)
-            raise ValueError(f"Missing required columns: {missing_columns}")
+        # Transaction velocity calculation
+        first_transaction = (
+            self.engineered_data.groupby('user_id')['purchase_time']
+            .transform('min')
+        )
+        last_transaction = (
+            self.engineered_data.groupby('user_id')['purchase_time']
+            .transform('max')
+        )
         
-        self.fraud_data = fraud_data.copy()
-        self.scaler = None
-        self.encoder = None
+        time_diff = (last_transaction - first_transaction).dt.total_seconds()
+        self.engineered_data['transaction_velocity'] = np.where(
+            time_diff == 0,
+            0,
+            time_diff / self.engineered_data['transaction_frequency']
+        )
+
+    def _scale_features(self):
+        """Apply feature scaling"""
+        # Min-Max scaling
+        minmax_cols = ['purchase_value', 'transaction_frequency', 'transaction_velocity']
+        scaler = MinMaxScaler()
+        self.engineered_data[minmax_cols] = scaler.fit_transform(
+            self.engineered_data[minmax_cols]
+        )
         
-        if self.fraud_data.isnull().any().any():
-            self.logger.warning("Input data contains missing values. Proceed with caution.")
+        # Standard scaling for age
+        std_scaler = StandardScaler()
+        self.engineered_data['age_scaled'] = std_scaler.fit_transform(
+            self.engineered_data[['age']]
+        )
 
-    def add_transaction_frequency_velocity(self):
-        """
-        Add transaction frequency and velocity features.
-        """
-        self.logger.info("Adding transaction frequency and velocity features...")
+    def _encode_categoricals(self):
+        """Handle categorical encoding"""
+        # One-hot encoding
+        self.engineered_data = pd.get_dummies(
+            self.engineered_data,
+            columns=['source', 'browser', 'country'],
+            drop_first=True,
+            prefix=['src', 'br', 'ctry']
+        )
+        
+        # Label encoding
+        label_enc = LabelEncoder()
+        self.engineered_data['sex_code'] = label_enc.fit_transform(
+            self.engineered_data['sex']
+        )
+
+    def _finalize_features(self):
+        """Final cleanup"""
+        # Drop redundant columns
+        self.engineered_data.drop(
+            ['signup_time', 'purchase_time', 'sex'],
+            axis=1,
+            inplace=True
+        )
+        
+        # Convert boolean columns
+        bool_cols = self.engineered_data.select_dtypes(include='bool').columns
+        self.engineered_data[bool_cols] = self.engineered_data[bool_cols].astype(int)
+
+    def save_processed_data(self, output_path: str):
+        """Save engineered features"""
         try:
-            # Ensure 'purchase_time' is datetime
-            self.fraud_data['purchase_time'] = pd.to_datetime(self.fraud_data['purchase_time'])
-            
-            # Sort by user and purchase time
-            self.fraud_data.sort_values(by=['user_id', 'purchase_time'], inplace=True)
-            
-            # Transaction Frequency
-            self.fraud_data['transaction_frequency'] = self.fraud_data.groupby('user_id')['user_id'].transform('count')
-            
-            # Transaction Velocity (seconds between transactions)
-            self.fraud_data['transaction_velocity'] = self.fraud_data.groupby('user_id')['purchase_time'].diff().dt.total_seconds()
-            self.fraud_data['transaction_velocity'] = self.fraud_data['transaction_velocity'].fillna(0)
-            
-            self.logger.info("Successfully added transaction frequency and velocity features.")
+            self.engineered_data.to_csv(output_path, index=False)
+            self.logger.info(f"Data saved to {output_path}")
         except Exception as e:
-            self.logger.error("Error adding transaction features: %s", str(e))
+            self.logger.error(f"Save failed: {str(e)}")
             raise
 
-    def add_time_based_features(self):
-        """
-        Add time-based features: hour_of_day and day_of_week.
-        """
-        self.logger.info("Adding time-based features...")
-        try:
-            self.fraud_data['hour_of_day'] = self.fraud_data['purchase_time'].dt.hour
-            self.fraud_data['day_of_week'] = self.fraud_data['purchase_time'].dt.dayofweek  # Monday=0, Sunday=6
-            self.logger.info("Successfully added time-based features.")
-        except Exception as e:
-            self.logger.error("Error adding time-based features: %s", str(e))
-            raise
-
-    def normalize_features(self):
-        """
-        Normalize numerical features using StandardScaler.
-        """
-        numerical_features = ['purchase_value', 'age', 'transaction_frequency', 'transaction_velocity']
-        self.logger.info("Normalizing numerical features: %s", numerical_features)
-        try:
-            if self.scaler is None:
-                self.scaler = StandardScaler()
-                self.fraud_data[numerical_features] = self.scaler.fit_transform(self.fraud_data[numerical_features])
-                self.logger.info("Fitted StandardScaler and normalized features.")
-            else:
-                self.fraud_data[numerical_features] = self.scaler.transform(self.fraud_data[numerical_features])
-                self.logger.info("Normalized features using existing StandardScaler.")
-        except Exception as e:
-            self.logger.error("Error normalizing features: %s", str(e))
-            raise
-
-    def encode_categorical_features(self):
-        """
-        Encode categorical features using OneHotEncoder.
-        """
-        categorical_features = ['source', 'browser', 'sex']
-        self.logger.info("Encoding categorical features: %s", categorical_features)
-        try:
-            if self.encoder is None:
-                self.encoder = OneHotEncoder(drop='first', sparse_output=False)
-                encoded_features = self.encoder.fit_transform(self.fraud_data[categorical_features])
-                self.logger.info("Fitted OneHotEncoder with categories: %s", self.encoder.categories_)
-            else:
-                encoded_features = self.encoder.transform(self.fraud_data[categorical_features])
-                self.logger.info("Encoded features using existing OneHotEncoder.")
-            
-            # Create DataFrame and merge
-            encoded_df = pd.DataFrame(
-                encoded_features,
-                columns=self.encoder.get_feature_names_out(categorical_features),
-                index=self.fraud_data.index
-            )
-            self.fraud_data.drop(categorical_features, axis=1, inplace=True)
-            self.fraud_data = pd.concat([self.fraud_data, encoded_df], axis=1)
-            self.logger.info("Successfully encoded %d categorical features.", len(categorical_features))
-        except Exception as e:
-            self.logger.error("Error encoding categorical features: %s", str(e))
-            raise
-
-    def process(self):
-        """
-        Execute the full feature engineering pipeline.
-        :return: Processed DataFrame.
-        """
-        self.logger.info("Starting full feature engineering pipeline...")
-        try:
-            self.add_transaction_frequency_velocity()
-            self.add_time_based_features()
-            self.normalize_features()
-            self.encode_categorical_features()
-            self.logger.info("Feature engineering completed. Final data shape: %s", self.fraud_data.shape)
-            return self.fraud_data
-        except Exception as e:
-            self.logger.error("Feature engineering pipeline failed: %s", str(e))
-            raise
 class FeatureCredit:
     def __init__(self, data: pd.DataFrame, output_path: str):
         self.data = data.copy()
-        self.output_path = output_path  # Initialize output_path first
-        self.logger = self._setup_logger()
+        self.output_path = output_path
+        self.logger = setup_logger(self.__class__.__name__, log_dir=output_path)
         self.scaler = None
 
-        # Validate required columns
         required_columns = ["Time", "Amount"]
         missing = [col for col in required_columns if col not in self.data.columns]
         if missing:
             self.logger.error(f"Missing required columns: {missing}")
             raise ValueError(f"Missing required columns: {missing}")
 
-    def _setup_logger(self):
-        """Configure logging for the class."""
-        logger = logging.getLogger(self.__class__.__name__)
-        if not logger.handlers:
-            # Stream handler for console output
-            stream_handler = logging.StreamHandler()
-            # File handler for saving logs to a file
-            file_handler = logging.FileHandler(os.path.join(self.output_path, "feature_engineering.log"))
-            formatter = logging.Formatter(
-                "%(asctime)s - %(name)s - %(levelname)s - %(message)s"
-            )
-            stream_handler.setFormatter(formatter)
-            file_handler.setFormatter(formatter)
-            logger.addHandler(stream_handler)
-            logger.addHandler(file_handler)
-        logger.setLevel(logging.INFO)
-        return logger
-
     def scale_amount(self):
-        """Scale the 'Amount' feature using StandardScaler."""
+        """Scale the 'Amount' feature"""
         self.logger.info("Scaling 'Amount' feature...")
         try:
             self.scaler = StandardScaler()
@@ -181,27 +176,24 @@ class FeatureCredit:
             raise
 
     def create_time_features(self):
-        """Extract time-based features from the 'Time' column."""
+        """Create time-based features"""
         self.logger.info("Creating time-based features...")
         try:
-            # Convert seconds since reference to hour of the day (0-23)
+            # Hour of day (0-23)
             self.data["time_hour"] = (self.data["Time"].astype(int) % 86400) // 3600
-
-            # Extract day of the week (0=Monday, 6=Sunday)
+            # Day of week (0=Monday, 6=Sunday)
             self.data["day_of_week"] = (self.data["Time"].astype(int) // 86400) % 7
-
-            # Extract whether it's a weekend (1=Weekend, 0=Weekday)
+            # Weekend flag
             self.data["is_weekend"] = self.data["day_of_week"].apply(
                 lambda x: 1 if x >= 5 else 0
             )
-
-            self.logger.info("Time-based features created successfully.")
+            self.logger.info("Time features created successfully.")
         except Exception as e:
             self.logger.error(f"Error creating time features: {str(e)}")
             raise
 
-    def save_processed_data(self, filename: str ="featured_credit_data.csv"):
-        """Save the processed DataFrame to CSV."""
+    def save_processed_data(self, filename: str = "featured_credit_data.csv"):
+        """Save processed data"""
         try:
             output_file = os.path.join(self.output_path, filename)
             self.data.to_csv(output_file, index=False)
@@ -211,9 +203,9 @@ class FeatureCredit:
             raise
 
     def process(self):
-        """Execute the full pipeline."""
-        self.logger.info("Starting feature engineering pipeline...")
+        """Execute full pipeline"""
         try:
+            self.logger.info("Starting feature engineering pipeline...")
             self.scale_amount()
             self.create_time_features()
             self.save_processed_data()
