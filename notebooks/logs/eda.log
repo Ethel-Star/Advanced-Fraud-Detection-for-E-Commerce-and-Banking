@@ -1,0 +1,11 @@
+2025-03-11 15:02:44,605 - INFO - Starting feature engineering pipeline...
+2025-03-11 15:02:44,607 - INFO - Scaling 'Amount' feature...
+2025-03-11 15:02:44,616 - INFO - 'Amount' scaled successfully.
+2025-03-11 15:02:44,616 - INFO - Creating time-based features...
+2025-03-11 15:02:44,771 - INFO - Time features created successfully.
+2025-03-11 15:03:01,525 - INFO - Data saved to E:\DS+ML\AIM3\Final\Data\featured_credit_data.csv
+2025-03-11 15:03:01,527 - INFO - Pipeline completed successfully.
+2025-03-11 15:03:04,107 - INFO - Starting feature engineering
+2025-03-11 15:03:05,696 - INFO - Feature engineering completed successfully
+2025-03-11 15:03:58,291 - INFO - Starting feature engineering
+2025-03-11 15:03:59,446 - INFO - Feature engineering completed successfully
