@@ -1,32 +1,32 @@
-2025-03-12 10:25:53,096 - INFO - Starting data type cleaning...
-2025-03-12 10:25:57,184 - INFO - Checking missing values...
-2025-03-12 10:25:57,284 - INFO - Checking for duplicates...
-2025-03-12 10:26:02,572 - WARNING - Removed 1081 duplicates from credit data
-2025-03-12 10:26:02,585 - INFO - Performing consistency validation...
-2025-03-12 10:26:02,603 - INFO - Generating target distribution visualization...
-2025-03-12 10:26:07,548 - INFO - Fraud data saved to E:\DS+ML\AIM3\Final\Data/cleaned_fraud.csv
-2025-03-12 10:26:25,870 - INFO - Credit card data saved to E:\DS+ML\AIM3\Final\Data/cleaned_credit.csv
-2025-03-12 10:26:26,159 - INFO - IP data saved to E:\DS+ML\AIM3\Final\Data/cleaned_ip.csv
-2025-03-12 10:27:01,166 - INFO - Plotting distributions for fraud_data.
-2025-03-12 10:27:13,861 - INFO - Successfully plotted fraud_data distributions.
-2025-03-12 10:27:14,527 - INFO - Plotting distributions for creditcard_data.
-2025-03-12 10:27:20,069 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
-2025-03-12 10:27:20,416 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
-2025-03-12 10:27:21,125 - INFO - Successfully plotted creditcard_data distributions.
-2025-03-12 10:27:27,962 - INFO - Plotting relationships in fraud_data.
-2025-03-12 10:27:45,062 - INFO - Successfully plotted fraud_data relationships.
-2025-03-12 10:28:12,686 - INFO - Performing correlation analysis.
-2025-03-12 10:28:36,919 - INFO - Successfully performed correlation analysis.
-2025-03-12 10:28:41,830 - INFO - Mapping IP addresses to countries.
-2025-03-12 10:32:45,510 - INFO - Successfully mapped IP addresses to countries.
-2025-03-12 10:32:45,595 - INFO - Saving processed data to E:\DS+ML\AIM3\Final\Data/processed_fraud_data.csv.
-2025-03-12 10:32:47,428 - INFO - Data successfully saved to E:\DS+ML\AIM3\Final\Data/processed_fraud_data.csv.
-2025-03-12 10:33:10,180 - INFO - Starting feature engineering
-2025-03-12 10:33:16,774 - INFO - Feature engineering completed successfully
-2025-03-12 10:33:47,111 - INFO - Starting feature engineering pipeline...
-2025-03-12 10:33:47,113 - INFO - Scaling 'Amount' feature...
-2025-03-12 10:33:47,124 - INFO - 'Amount' scaled successfully.
-2025-03-12 10:33:47,124 - INFO - Creating time-based features...
-2025-03-12 10:33:47,768 - INFO - Time features created successfully.
-2025-03-12 10:34:05,545 - INFO - Data saved to E:\DS+ML\AIM3\Final\Data\featured_credit_data.csv
-2025-03-12 10:34:05,545 - INFO - Pipeline completed successfully.
+2025-03-12 20:03:41,374 - INFO - Starting data type cleaning...
+2025-03-12 20:03:43,686 - INFO - Checking missing values...
+2025-03-12 20:03:43,787 - INFO - Checking for duplicates...
+2025-03-12 20:03:48,829 - WARNING - Removed 1081 duplicates from credit data
+2025-03-12 20:03:48,842 - INFO - Performing consistency validation...
+2025-03-12 20:03:48,857 - INFO - Generating target distribution visualization...
+2025-03-12 20:04:07,437 - INFO - Fraud data saved to E:\DS+ML\AIM3\Final\Data/cleaned_fraud.csv
+2025-03-12 20:04:24,795 - INFO - Credit card data saved to E:\DS+ML\AIM3\Final\Data/cleaned_credit.csv
+2025-03-12 20:04:25,093 - INFO - IP data saved to E:\DS+ML\AIM3\Final\Data/cleaned_ip.csv
+2025-03-12 20:04:34,520 - INFO - Plotting distributions for fraud_data.
+2025-03-12 20:04:41,205 - INFO - Successfully plotted fraud_data distributions.
+2025-03-12 20:04:41,391 - INFO - Plotting distributions for creditcard_data.
+2025-03-12 20:04:46,938 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-03-12 20:04:47,270 - INFO - Using categorical units to plot a list of strings that are all parsable as floats or dates. If these strings should be plotted as numbers, cast to the appropriate data type before plotting.
+2025-03-12 20:04:48,112 - INFO - Successfully plotted creditcard_data distributions.
+2025-03-12 20:04:48,132 - INFO - Plotting relationships in fraud_data.
+2025-03-12 20:05:01,702 - INFO - Successfully plotted fraud_data relationships.
+2025-03-12 20:05:01,727 - INFO - Performing correlation analysis.
+2025-03-12 20:05:13,749 - INFO - Successfully performed correlation analysis.
+2025-03-12 20:05:13,774 - INFO - Mapping IP addresses to countries.
+2025-03-12 20:09:04,052 - INFO - Successfully mapped IP addresses to countries.
+2025-03-12 20:09:04,066 - INFO - Saving processed data to E:\DS+ML\AIM3\Final\Data/processed_fraud_data.csv.
+2025-03-12 20:09:05,410 - INFO - Data successfully saved to E:\DS+ML\AIM3\Final\Data/processed_fraud_data.csv.
+2025-03-12 20:09:06,452 - INFO - Starting feature engineering
+2025-03-12 20:09:09,371 - INFO - Feature engineering completed successfully
+2025-03-12 20:09:29,843 - INFO - Starting feature engineering pipeline...
+2025-03-12 20:09:29,917 - INFO - Scaling 'Amount' feature...
+2025-03-12 20:09:30,002 - INFO - 'Amount' scaled successfully.
+2025-03-12 20:09:30,004 - INFO - Creating time-based features...
+2025-03-12 20:09:30,212 - INFO - Time features created successfully.
+2025-03-12 20:09:49,090 - INFO - Data saved to E:\DS+ML\AIM3\Final\Data\featured_credit_data.csv
+2025-03-12 20:09:51,325 - INFO - Pipeline completed successfully.
