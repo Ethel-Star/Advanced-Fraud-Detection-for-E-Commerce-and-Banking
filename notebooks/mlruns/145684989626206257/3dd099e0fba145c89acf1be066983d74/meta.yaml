@@ -1,0 +1,15 @@
+artifact_uri: file:///e:/DS%2BML/AIM3/Final/Advanced-Fraud-Detection-for-E-Commerce-and-Banking/notebooks/mlruns/145684989626206257/3dd099e0fba145c89acf1be066983d74/artifacts
+end_time: 1741741669945
+entry_point_name: ''
+experiment_id: '145684989626206257'
+lifecycle_stage: active
+run_id: 3dd099e0fba145c89acf1be066983d74
+run_name: Credit_Random_Forest
+run_uuid: 3dd099e0fba145c89acf1be066983d74
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741741588581
+status: 3
+tags: []
+user_id: ethio

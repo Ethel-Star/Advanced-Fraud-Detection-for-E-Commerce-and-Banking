@@ -1,0 +1,15 @@
+artifact_uri: file:///e:/DS%2BML/AIM3/Final/Advanced-Fraud-Detection-for-E-Commerce-and-Banking/notebooks/mlruns/308710925807378090/3994faa6d2034aabbb444b1416487c77/artifacts
+end_time: 1741734103766
+entry_point_name: ''
+experiment_id: '308710925807378090'
+lifecycle_stage: active
+run_id: 3994faa6d2034aabbb444b1416487c77
+run_name: Fraud_Gradient_Boosting
+run_uuid: 3994faa6d2034aabbb444b1416487c77
+source_name: ''
+source_type: 4
+source_version: ''
+start_time: 1741733929580
+status: 3
+tags: []
+user_id: ethio
