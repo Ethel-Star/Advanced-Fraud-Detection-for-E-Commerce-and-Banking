@@ -21,8 +21,7 @@ import seaborn as sns
 import joblib
 from scipy.stats import randint, uniform
 import logging
-
-
+import warnings 
 class FraudDetectionModel:
     def __init__(self, credit_file, fraud_file):
         """
