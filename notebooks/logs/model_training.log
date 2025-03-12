@@ -1,0 +1,28 @@
+2025-03-12 10:39:43,339 - hyperparameter_tuning - INFO - Preprocessing fraud dataset...
+2025-03-12 10:39:51,046 - hyperparameter_tuning - WARNING - Could not convert column device_id to datetime: Unknown datetime string format, unable to parse: QVPSPJUOCKZAR, at position 0
+2025-03-12 10:39:52,115 - hyperparameter_tuning - INFO - Processing high cardinality columns: ['device_id']
+2025-03-12 10:40:02,615 - hyperparameter_tuning - INFO - Preprocessing completed for fraud dataset.
+2025-03-12 10:40:03,150 - hyperparameter_tuning - INFO - Starting hyperparameter tuning for Gradient Boosting...
+2025-03-12 11:15:12,875 - hyperparameter_tuning - INFO - Preprocessing fraud dataset...
+2025-03-12 11:15:25,538 - hyperparameter_tuning - INFO - Label Encoding: ['device_id']
+2025-03-12 11:15:44,969 - hyperparameter_tuning - INFO - Preprocessing completed for fraud dataset.
+2025-03-12 11:15:45,078 - hyperparameter_tuning - ERROR - Pipeline failed for fraud: too many values to unpack (expected 4)
+Traceback (most recent call last):
+  File "E:\DS+ML\AIM3\Final\Advanced-Fraud-Detection-for-E-Commerce-and-Banking\scripts\hyperparameter_tuning.py", line 314, in run
+    X_train, X_test, y_train, y_test = self.preprocess(dataset_type)
+    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+ValueError: too many values to unpack (expected 4)
+2025-03-12 11:56:23,144 - hyperparameter_tuning - INFO - Preprocessing fraud dataset...
+2025-03-12 11:56:47,984 - hyperparameter_tuning - WARNING - Could not convert column device_id to datetime: Unknown datetime string format, unable to parse: QVPSPJUOCKZAR, at position 0
+2025-03-12 11:56:48,774 - hyperparameter_tuning - INFO - Processing high cardinality columns: ['device_id']
+2025-03-12 11:57:00,124 - hyperparameter_tuning - INFO - Preprocessing completed for fraud dataset.
+2025-03-12 11:57:00,554 - hyperparameter_tuning - INFO - Starting hyperparameter tuning for Gradient Boosting...
+2025-03-12 12:45:25,590 - hyperparameter_tuning - INFO - Preprocessing fraud dataset...
+2025-03-12 12:45:33,395 - hyperparameter_tuning - WARNING - Could not convert column device_id to datetime: Unknown datetime string format, unable to parse: QVPSPJUOCKZAR, at position 0
+2025-03-12 12:45:33,691 - hyperparameter_tuning - INFO - Processing high cardinality columns: ['device_id']
+2025-03-12 12:45:44,723 - hyperparameter_tuning - INFO - Preprocessing completed for fraud dataset.
+2025-03-12 12:45:44,815 - hyperparameter_tuning - INFO - Starting hyperparameter tuning for Gradient Boosting...
+2025-03-12 14:00:12,292 - hyperparameter_tuning - INFO - Gradient Boosting hyperparameter tuning completed.
+2025-03-12 14:07:46,251 - hyperparameter_tuning - INFO - ROC curve saved for Fraud dataset.
+2025-03-12 14:07:48,759 - hyperparameter_tuning - INFO - Confusion matrix saved for Fraud dataset.
+2025-03-12 14:07:48,811 - hyperparameter_tuning - INFO - MLflow logging completed for Fraud dataset.
