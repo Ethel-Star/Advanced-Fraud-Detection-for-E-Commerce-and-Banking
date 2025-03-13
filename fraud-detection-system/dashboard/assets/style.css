@@ -1,0 +1,243 @@
+/* style.css */
+
+/* Main container styling with light gradient background */
+body, .main-container {
+    background: linear-gradient(135deg, #E6E6FA 0%, #FFE5E5 100%) !important;
+    color: #333333 !important; /* Darker text for contrast */
+    font-family: 'Arial', sans-serif !important;
+    padding: 20px !important;
+    min-height: 100vh !important;
+    margin: 0 !important;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+/* Logo styling */
+.logo-container {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.logo-container img {
+    max-width: 300px;
+    height: auto;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+/* Header styling */
+h2.gradient-text {
+    text-align: center;
+    font-size: 30px;
+    margin-bottom: 5px;
+    background: linear-gradient(90deg, #FF6B97, #FFD700);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+    text-align: center;
+    color: #FF6B97; /* Coral */
+    font-size: 36px;
+    margin-bottom: 5px;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+h3 {
+    text-align: center;
+    color: #00C4CC; /* Teal */
+    font-size: 18px;
+    margin-bottom: 20px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+/* Navigation buttons container */
+.nav-buttons {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+/* Button styling */
+button {
+    background-color: #00C4CC !important; /* Teal */
+    color: #FFFFFF !important;
+    border: none !important;
+    padding: 15px 30px !important;
+    margin: 10px !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    font-size: 18px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button:hover {
+    background-color: #009EA6 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button#prediction-button {
+    background-color: #FF6B97 !important; /* Coral */
+}
+
+button#prediction-button:hover {
+    background-color: #FF3860 !important;
+}
+
+/* Summary section */
+.summary-section h2 {
+    color: #FFD700;
+    font-size: 24px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.metrics-row {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+}
+
+.metric-box {
+    background-color: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+    border-radius: 15px;
+    margin: 10px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.metric-box:hover {
+    transform: scale(1.05);
+}
+
+.metric-box p {
+    color: #666666;
+    margin: 0;
+    font-size: 16px;
+}
+
+.metric-box h3 {
+    color: #FF6B97;
+    font-size: 24px;
+    margin: 0;
+    text-align: center;
+}
+
+/* Visualization section */
+.visualization-section h2 {
+    color: #FFD700;
+    font-size: 24px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.visualization-section .dash-graph {
+    margin: 20px;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Prediction section */
+.prediction-section h2 {
+    color: #FFD700;
+    font-size: 24px;
+    text-align: center;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.prediction-section h3 {
+    color: #00C4CC;
+    text-align: left;
+}
+
+.prediction-section label {
+    color: #666666;
+    font-size: 16px;
+}
+
+.prediction-section p {
+    color: #333333;
+    font-size: 14px;
+    margin-bottom: 10px;
+}
+
+textarea {
+    width: 100% !important;
+    background-color: rgba(255, 255, 255, 0.8) !important;
+    backdrop-filter: blur(5px) !important;
+    color: #333333 !important;
+    border: 2px solid #00C4CC !important;
+    border-radius: 10px !important;
+    padding: 10px !important;
+    font-size: 16px !important;
+    resize: none !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+textarea:focus {
+    border-color: #FF6B97 !important;
+    box-shadow: 0 6px 12px rgba(255, 107, 151, 0.3);
+}
+
+textarea#credit-input {
+    height: 300px !important;
+}
+
+textarea#fraud-input {
+    height: 500px !important;
+    border-color: #FF6B97 !important;
+}
+
+textarea#fraud-input:focus {
+    border-color: #FF3860 !important;
+}
+
+button#credit-predict-button, button#fraud-predict-button {
+    background-color: #00C4CC !important;
+    color: #FFFFFF !important;
+    border: none !important;
+    padding: 12px 24px !important;
+    margin: 10px 0 !important;
+    border-radius: 10px !important;
+    cursor: pointer !important;
+    font-size: 16px !important;
+    transition: all 0.3s ease !important;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+button#fraud-predict-button {
+    background-color: #FF6B97 !important;
+}
+
+button#credit-predict-button:hover, button#fraud-predict-button:hover {
+    background-color: #009EA6 !important;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+}
+
+button#fraud-predict-button:hover {
+    background-color: #FF3860 !important;
+}
+
+#credit-output, #fraud-output {
+    color: #333333;
+    margin-top: 10px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 5px;
+}
+
+/* Ensure charts have transparent backgrounds */
+.dash-graph .plotly {
+    background-color: rgba(0, 0, 0, 0) !important;
+    border-radius: 10px;
+}
