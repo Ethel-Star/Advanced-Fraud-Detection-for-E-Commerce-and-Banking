@@ -3,7 +3,6 @@ from flask import Flask, request, jsonify
 import joblib
 import pandas as pd
 from pathlib import Path
-
 # Configure logging
 logging.basicConfig(
     level=logging.INFO,
